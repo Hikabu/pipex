@@ -6,7 +6,7 @@
 /*   By: vfedorov <vfedorov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 17:16:24 by vfedorov          #+#    #+#             */
-/*   Updated: 2023/05/09 19:18:49 by vfedorov         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:53:34 by vfedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	child(t_pipex *pip, char **env, char **av)
 	else
 		forex(av[2], env);
 	write(2, "ERRORINCHILD\n", 13);
+	exit(1);
 }
 
 void	piping(t_pipex *pip, char **env, char **av, int i)
@@ -60,7 +61,8 @@ void	piping(t_pipex *pip, char **env, char **av, int i)
 		close(pip->outfile);
 		closeall(pip);
 		forex(av[pip->ac - 2], env);
-		write(2, "ERROR", 5);
+		write(2, "ERROR\n", 6);
+		exit(1);
 	}
 	close(pip->infile);
 	close(pip->outfile);
